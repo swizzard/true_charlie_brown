@@ -8,6 +8,7 @@ from time import sleep
 
 from twitter import Twitter
 from twitter.oauth import OAuth
+from twitter.api import TwitterHTTPError
 
 from truisms import gen
 
@@ -28,6 +29,8 @@ def tweet():
             sleep(1800)
         except StopIteration:
             g = gen()
+        except TwitterHTTPError as:
+            pass
 
 if __name__ == "__main__":
     tweet()
