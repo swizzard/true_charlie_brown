@@ -29,8 +29,7 @@ def tweet():
             sleep(1800)
         except StopIteration:
             g = gen()
-        except TwitterHTTPError:
-            pass
-
+        except TwitterHTTPError as e:
+            sys.stdout.write(e)
 if __name__ == "__main__":
     tweet()
