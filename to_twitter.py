@@ -27,7 +27,7 @@ def tweet():
             t.statuses.update(status=g.next())
             sleep(1800)
         except StopIteration:
-            sys.exit(0)
+            g = gen()
 
 if __name__ == "__main__":
     tweet()
