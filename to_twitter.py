@@ -27,9 +27,11 @@ def tweet():
         try:
             t.statuses.update(status=g.next())
             sleep(1800)
-        except StopIteration:
-            g = gen()
-        except TwitterHTTPError as e:
+        except Exception as e:
             sys.stdout.write(e)
+#        except StopIteration:
+#            g = gen()
+#        except TwitterHTTPError as e:
+#            sys.stdout.write(e)
 if __name__ == "__main__":
     tweet()
