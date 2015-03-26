@@ -8,7 +8,7 @@ from time import sleep
 
 from twitter import Twitter
 from twitter.oauth import OAuth
-from twitter.api import TwitterHTTPError
+from twitter.api import TwitterError
 
 from truisms import gen
 
@@ -32,6 +32,8 @@ def tweet():
         except StopIteration:
             logger.info("generator exhausted, restarting")
             g = gen()
+        except TwitterError as te:
+            logger.exception("%s: %s", type(te), te.message)
         except Exception as e:
             logger.exception(e.message)
             raise
