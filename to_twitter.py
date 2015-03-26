@@ -41,6 +41,7 @@ def tweet():
         except SystemExit as se:
             logger.exception("caught SystemExit: %s", se.message)
             raise
-        sleep(1800)
+        finally:
+            sleep(1800)
 if __name__ == "__main__":
     tweet()
