@@ -1,7 +1,7 @@
 # coding=utf8
 __author__ = 'Sam Raker'
 
-
+import logging
 from os import environ
 import sys
 from time import sleep
@@ -21,17 +21,23 @@ def do_auth():
 
 
 def tweet():
+    logger = logging.getLogger(__name__)
     t = do_auth()
     g = gen()
     while True:
         try:
-            t.statuses.update(status=g.next())
-            sleep(1800)
+            new_status = g.next()
+            t.statuses.update(status=new_status)
+            logger.info("posted status: %s", new_status)
+        except StopIteration:
+            logger.info("generator exhausted, restarting")
+            g = gen()
         except Exception as e:
-            sys.stdout.write(str(e))
-#        except StopIteration:
-#            g = gen()
-#        except TwitterHTTPError as e:
-#            sys.stdout.write(e)
+            logger.exception(e.message)
+            raise
+        except SystemExit as se:
+            logger.exception("caught SystemExit: %s", se.message)
+            raise
+        sleep(1800)
 if __name__ == "__main__":
     tweet()
