@@ -21,7 +21,7 @@ def do_auth():
 
 
 def tweet():
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger(__file__)
     t = do_auth()
     g = gen()
     while True:
