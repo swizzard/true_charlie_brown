@@ -2,7 +2,6 @@
 __author__ = 'Sam Raker'
 
 import logging
-from os import environ
 import sys
 from time import sleep
 
@@ -10,15 +9,12 @@ from twitter import Twitter
 from twitter.oauth import OAuth
 from twitter.api import TwitterHTTPError
 
+from config import config 
 from truisms import gen
 
 
 def do_auth():
-    return Twitter(auth=OAuth(environ.get("ACCESS_TOKEN"),
-                              environ.get("ACCESS_SECRET"),
-                              environ.get("API_KEY"),
-                              environ.get("API_SECRET")))
-
+    return Twitter(auth=OAuth(**config))
 
 def tweet():
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
