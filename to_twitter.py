@@ -9,7 +9,7 @@ from twitter import Twitter
 from twitter.oauth import OAuth
 from twitter.api import TwitterHTTPError
 
-from config import config 
+from miniconfig import config
 from truisms import gen
 
 
