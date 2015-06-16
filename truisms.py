@@ -6,15 +6,12 @@ from twitter.oauth import OAuth
 from botmaster import gen_tweet
 from miniconfig import config
 
-@gen_tweet(auth=OAuth(**config), interval=1800)
+@gen_tweet(auth=OAuth(**config), interval=1800, ignore=[187], restart=True)
 def gen():
     with open("truisms.txt") as f:
         i = iter(f.readlines())
     while True:
-        try:
-            yield "{}, Charlie Brown".format(i.next().rstrip().title())
-        except StopIteration:
-            break
+        yield "{}, Charlie Brown".format(i.next().title().rstrip())
 
 
 if __name__ == "__main__":
