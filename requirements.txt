@@ -1,3 +1,2 @@
-twitter==1.15.0
 git+ssh://git@github.com/swizzard/miniconfig
 git+ssh://git@github.com/swizzard/botmaster

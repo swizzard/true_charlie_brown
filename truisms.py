@@ -1,17 +1,14 @@
 # coding=utf8
 __author__ = 'Sam Raker'
 
-from twitter.oauth import OAuth
-
-from botmaster import gen_tweet
+from botmaster import _auth, gen_tweet
 from miniconfig import config
 
-@gen_tweet(auth=OAuth(**config), interval=1800, ignore=[187], restart=True)
+@gen_tweet(auth=_auth(**config), interval=1800, ignore=[187], restart=True)
 def gen():
     with open("truisms.txt") as f:
-        i = iter(f.readlines())
-    while True:
-        yield "{}, Charlie Brown".format(i.next().title().rstrip())
+        for line in f:
+            yield "{}, Charlie Brown".format(line.title().rstrip())
 
 
 if __name__ == "__main__":
